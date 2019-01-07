@@ -5,7 +5,6 @@ Reinforcement Learning or Deep Q-Learning.
 #Packages
 numpy
 keras+tensorflow
-pyprocess
 
 Steps to run: 
 1. python dl-agent.py -> One run of 500 episodes 
