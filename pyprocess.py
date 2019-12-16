@@ -999,12 +999,12 @@ class SqBessel_process(Diffusion_process):
         try:
             return (y/x)**(0.5*self.mu)*np.exp(-0.5*(x+y)/self.nu**2/t)/(0.5*self.nu**2*t)*iv(abs(self.mu),4*np.sqrt(x*y)/(self.nu**2*t))
         except AttributeError:
-            print "Attn: nu must be known and defined to calculate the transition pdf."
+            print("Attn: nu must be known and defined to calculate the transition pdf.")
             
     def _generate_sample_path_no_absorption(self, times):
         "mu must be greater than -1. The parameter times is a list of times to sample at."
         if self.mu<=-1:
-            print "Attn: mu must be greater than -1. It is currently %f."%self.mu
+            print("Attn: mu must be greater than -1. It is currently %f."%self.mu)
             return
         else:
             if not self.conditional:
@@ -1030,7 +1030,7 @@ class SqBessel_process(Diffusion_process):
     def _generate_sample_path_with_absorption(self,times):
         "mu must be less than 0."
         if self.mu>=0:
-            print "Attn: mu must be less than 0. It is currently %f."%self.mu
+            print("Attn: mu must be less than 0. It is currently %f."%self.mu)
         else:
             if not self.conditional:
                 path=[]
@@ -1063,7 +1063,7 @@ class SqBessel_process(Diffusion_process):
     def generate_sample_FHT_bridge(self,times):
         "mu must be less than 0. This process has absorption at L=0. It simulates the absorption at 0 at some random time, tao, and creates a bridge process."
         if self.mu>0:
-            print "mu must be less than 0. It is currently %f."%self.mu
+            print("mu must be less than 0. It is currently %f."%self.mu)
         else:
             X=self.startPosition
             t=self.t_0
@@ -1447,7 +1447,7 @@ class Jump_Diffusion_process(object):
                 self.endPosition = dict["endPosition"]
                 self.conditional=True
         except KeyError:
-            print "Missing constraint in initial\end value dictionary. Check spelling?"    
+            print("Missing constraint in initial\end value dictionary. Check spelling?" )
     def transition_pdf(self,t,y):
         "this method calls self._transition_pdf(x) in the subclass"
         self._check_time(t)
@@ -1461,7 +1461,7 @@ class Jump_Diffusion_process(object):
     def expected_value(self,f,t,N):
         "uses a monte carlo approach to evaluate the expected value of the process f(X_t). N is the number of iterations. The parameter f\
         is a univariate python function."
-        print "Attn: performing a Monte Carlo simulation..."
+        print("Attn: performing a Monte Carlo simulation...")
         self._check_time(t)
         if not self.conditional:
             sum=0
@@ -1522,11 +1522,11 @@ class Jump_Diffusion_process(object):
         return self.Euler_scheme(t,return_array=False)
         
     def _transition_pdf(self,x,t,y):
-        print "Attn: transition pdf not defined"
+        print ("Attn: transition pdf not defined")
 
     def _check_time(self,t):
         if t<self.startTime:
-            print "Attn: inputed time not valid (check if beginning time is less than startTime)."
+            print ("Attn: inputed time not valid (check if beginning time is less than startTime).")
     
         
 
@@ -1713,7 +1713,7 @@ class Geometric_gamma_process(Jump_Diffusion_process):
                 if self.sigma<self.mu: #this condition gauruntees the expectation exists
                     return self.startPosition*(1-self.sigma/self.mu)**(-self.mu**2*(t-self.startTime)/self.sigma)
                 else:
-                    print "Attn: does not exist."
+                    print ("Attn: does not exist.")
                     return "DNE"
         
         def _generate_sample_path(self,times):
@@ -1900,7 +1900,7 @@ class InverseGaussian(object):
 
 def bridge_creation(process,times, *args):
    # this algorithm relies on the fact that 1-dim diffusion are time reversible.
-    print "Attn: using an AR method..."
+    print ("Attn: using an AR method...")
     process.conditional = False
     temp = process.startPosition
     while (True):
