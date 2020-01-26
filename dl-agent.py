@@ -40,7 +40,7 @@ class Agent:
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 		
-		print "Model Created"
+		print("Model Created")
 
 		return model
 
@@ -141,7 +141,7 @@ class Agent:
 					self.total_reward = self.total_reward + self.apos * cur_st.A + self.bpos * cur_st.B
 					break
 
-			print "Episode: "+str(num_episodes)+" Total Reward: "+str(self.total_reward/1000.0)
+			print("Episode: "+str(num_episodes)+" Total Reward: "+str(self.total_reward/1000.0))
 			s = str(num_episodes)+" "+str(self.total_reward/1000.0)+"\n"
 			fp.write(s)
 
